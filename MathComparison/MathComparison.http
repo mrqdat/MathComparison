@@ -1,0 +1,11 @@
+@MathComparison_HostAddress = http://localhost:5006
+
+GET {{MathComparison_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{MathComparison_HostAddress}}/todos/1
+Accept: application/json
+
+###

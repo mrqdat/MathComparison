@@ -1,6 +1,6 @@
 ﻿namespace MathComparison.src.Domain.ValueObject
 {
-    public enum CmparaitonOperator
+    public enum ComparisionOperator
     {
         Equal,
         GreaterThan,

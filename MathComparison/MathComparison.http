@@ -1,11 +1,17 @@
 @MathComparison_HostAddress = http://localhost:5006
 
-GET {{MathComparison_HostAddress}}/todos/
+GET {{MathComparison_HostAddress}}/api/math/generate?=ez
 Accept: application/json
 
 ###
+GET {{MathComparison_HostAddress}}/api/math/generate?=normal
+Accept: application/json
 
-GET {{MathComparison_HostAddress}}/todos/1
+###
+GET {{MathComparison_HostAddress}}/api/math/generate?=hard
+Accept: application/json
+
+GET {{MathComparison_HostAddress}}/
 Accept: application/json
 
 ###

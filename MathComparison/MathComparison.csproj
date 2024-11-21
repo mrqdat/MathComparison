@@ -13,15 +13,16 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="7.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="7.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="src\Application\Handler\" />
     <Folder Include="src\Application\Exceptions\" />
     <Folder Include="src\Infrastructure\Configuration\" />
-    <Folder Include="src\Infrastructure\Services\" />
     <Folder Include="src\Infrastructure\Persistance\" />
-    <Folder Include="src\Presentation\Controllers\" />
     <Folder Include="src\Presentation\Middleware\" />
     <Folder Include="src\Presentation\ViewModels\" />
     <Folder Include="test\IntergrationTest\Infrastructure\" />

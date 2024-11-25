@@ -23,6 +23,7 @@
     <Folder Include="src\Application\Exceptions\" />
     <Folder Include="src\Infrastructure\Configuration\" />
     <Folder Include="src\Infrastructure\Persistance\" />
+    <Folder Include="src\Infrastructure\Services\" />
     <Folder Include="src\Presentation\Middleware\" />
     <Folder Include="src\Presentation\ViewModels\" />
     <Folder Include="test\IntergrationTest\Infrastructure\" />

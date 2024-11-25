@@ -1,23 +1,31 @@
 using MathComparison.src.Application.Services;
 using MathComparison.src.Domain.Interfaces;
-using MathComparison.src.Infrastructure.Services;
-
+ 
 var builder = WebApplication.CreateSlimBuilder(args);
-//builder.Services.AddScoped<MathExpressionGenerator>();
-//builder.Services.AddScoped<MathComparisonService>();
-builder.Services.AddScoped<IMathExpressionService, MathExpressionGenerator>();
-builder.Services.AddControllers();
-builder.Services.AddSwaggerGen();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddControllers();
+builder.Services.AddSwaggerGen( a =>
+{
+    a.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "MathComparison API",
+        Version = "v1",
+        Description = "API for comparing math expressions."
+    });
+});
+builder.Services.AddScoped<IMathExpressionService, MathComparisonService>();
 var app = builder.Build();
 
-
-app.UseSwagger();
-app.UseSwaggerUI();
- 
+if(app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI( c => {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "MathComparison API v1");
+            c.RoutePrefix = ""; 
+    });
+}
 app.UseRouting();
 app.MapControllers();
 
 app.Run();
-
- 

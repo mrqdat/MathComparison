@@ -7,6 +7,9 @@ EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 # Install clang/zlib1g-dev dependencies for publishing to native
+
+ENV ASPNETCORE_ENVIRONMENT=Development
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     clang zlib1g-dev

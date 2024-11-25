@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MathComparison.src.Presentation.Controllers
 {
     [ApiController]
-    [Route("api/[Controller]")]
+    [Route("api/math")]
     public class MathcomparisionController : ControllerBase
     {
         private readonly IMathExpressionService _service;
@@ -19,7 +19,7 @@ namespace MathComparison.src.Presentation.Controllers
         }
 
         [HttpGet("generate")]
-        public IActionResult Generate([FromBody] string difficulty = "ez")
+        public IActionResult Generate([FromQuery] string difficulty )
         {
             try
             {
@@ -32,7 +32,7 @@ namespace MathComparison.src.Presentation.Controllers
         }
 
         [HttpPost("compare")]
-        public IActionResult Compare(ComparisionRequest request)
+        public IActionResult Compare([FromBody] ComparisionRequest request)
         {
             try
             {

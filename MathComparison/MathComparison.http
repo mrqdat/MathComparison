@@ -21,7 +21,7 @@ POST {{MathComparison_HostAddress}}/api/math/compare
 Accept: application/json
 
 {
-    "Expression1" = "10+2",
+    "Expression1" = "10 + 2",
     "Expression2" = "5",
     "Operator" = "="
 }

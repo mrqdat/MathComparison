@@ -5,10 +5,16 @@
         /// <summary>
         /// 
         /// </summary>
-        public string? Expression { get; set; }
+        public string? Expression { get;  }
         /// <summary>
         /// 
         /// </summary>
-        public double Result { get; set; }
+        public double Result { get;  }
+
+        public MathExpression(string expression, double result)
+        {
+            Expression = expression;
+            Result = result;
+        }
     }
 }

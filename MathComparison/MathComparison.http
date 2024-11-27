@@ -1,17 +1,38 @@
-@MathComparison_HostAddress = http://localhost:5006
+﻿@MathComparison_HostAddress = http://localhost:5006
+### dựa trên mức độ khó
+ 
+GET {{MathComparison_HostAddress}}/api/math/generate?=ez
+Accept: application/json
+
+### normal mode
+GET {{MathComparison_HostAddress}}/api/math/generate?=normal
+Accept: application/json
+
+### gard mode
+GET {{MathComparison_HostAddress}}/api/math/generate?=hard
+Accept: application/json
+ 
+### dựa trên route template
+GET {{MathComparison_HostAddress}}/api/math/ez/generate
+Accept: application/json
+
+###
+POST {{MathComparison_HostAddress}}/api/math/compare
+Accept: application/json
+
+{
+    "Expression1" = "10 + 2",
+    "Expression2" = "5",
+    "Operator" = "="
+}
+
+###
 
 GET {{MathComparison_HostAddress}}/api/math/generate?=ez
 Accept: application/json
 
-###
-GET {{MathComparison_HostAddress}}/api/math/generate?=normal
-Accept: application/json
-
-###
-GET {{MathComparison_HostAddress}}/api/math/generate?=hard
-Accept: application/json
-
-GET {{MathComparison_HostAddress}}/
-Accept: application/json
-
-###
+{
+    "Expression1" = "10+2",
+    "Expression2" = "5",
+    "Operator" = "="
+}

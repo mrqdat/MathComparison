@@ -32,6 +32,7 @@ namespace MathComparison.src.Application.Services
                 "normal" => (GenerateSimpleExpression(), GenerateSimpleExpression()),
                 "hard" => (GenerateComplexExpression(), GenerateComplexExpression()),
                 _ => throw new ArgumentException("invalid difficulty")
+
             };
         }
 
@@ -49,7 +50,6 @@ namespace MathComparison.src.Application.Services
             var randomOpr = opr[random.Next(opr.Length)];
 
             return $"{leftvalue} {randomOpr} {rightvalue}";
-
         }
 
         public static string GenerateComplexExpression()

@@ -8,15 +8,20 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 # Install clang/zlib1g-dev dependencies for publishing to native
 
-ENV ASPNETCORE_ENVIRONMENT=Development
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-    clang zlib1g-dev
+    clang zlib1g-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV ASPNETCORE_ENVIRONMENT=Production
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+
 COPY ["MathComparison/MathComparison.csproj", "MathComparison/"]
 RUN dotnet restore "./MathComparison/MathComparison.csproj"
+
 COPY . .
 WORKDIR "/src/MathComparison"
 RUN dotnet build "./MathComparison.csproj" -c $BUILD_CONFIGURATION -o /app/build

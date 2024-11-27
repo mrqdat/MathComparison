@@ -34,5 +34,4 @@
 		<Folder Include="test\UnitTest\Application\" />
 		<Folder Include="test\UnitTest\Domain\" />
 	</ItemGroup>
-
 </Project>

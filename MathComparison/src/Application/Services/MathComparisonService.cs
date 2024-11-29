@@ -2,6 +2,7 @@
 using MathComparison.src.Domain.Entities;
 using MathComparison.src.Domain.Interfaces;
 using MathComparison.src.Domain.ValueObject;
+using Mathos.Parser;
 using System.Data;
 
 namespace MathComparison.src.Application.Services
@@ -11,8 +12,8 @@ namespace MathComparison.src.Application.Services
         private static readonly Random random = new();
         public bool EvaluateComparison(ComparisionRequest request)
         {
-            var value1 = EvaluateExpression(request.Expression1);
-            var value2 = EvaluateExpression(request.Expression2);
+            var value1 = string.IsNullOrEmpty(request.Expression1) == true ? 0 : EvaluateExpression(request.Expression1);
+            var value2 = string.IsNullOrEmpty(request.Expression2) == true ? 0 : EvaluateExpression(request.Expression2);
 
             return request.Operator switch
             {
@@ -62,8 +63,8 @@ namespace MathComparison.src.Application.Services
         {
             try
             {
-                var dataTable = new DataTable();
-                return Convert.ToDouble(dataTable.Compute(expression, string.Empty));
+                var data = new MathParser().Parse(expression);
+                return Convert.ToDouble(data);
             }
             catch
             {

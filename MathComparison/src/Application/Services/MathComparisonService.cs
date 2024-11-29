@@ -10,6 +10,7 @@ namespace MathComparison.src.Application.Services
     public class MathComparisonService : IMathExpressionService
     {
         private static readonly Random random = new();
+
         public bool EvaluateComparison(ComparisionRequest request)
         {
             var value1 = string.IsNullOrEmpty(request.Expression1) == true ? 0 : EvaluateExpression(request.Expression1);
@@ -31,7 +32,8 @@ namespace MathComparison.src.Application.Services
                 "ez" => (GenerateSimpleNumber(), GenerateSimpleNumber()),
                 "normal" => (GenerateSimpleExpression(), GenerateSimpleExpression()),
                 "hard" => (GenerateComplexExpression(), GenerateComplexExpression()),
-                _ => throw new ArgumentException("invalid difficulty mode")
+                _ => throw new ArgumentException("invalid difficulty")
+
             };
         }
 

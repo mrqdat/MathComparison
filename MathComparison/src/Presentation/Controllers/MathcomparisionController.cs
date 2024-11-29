@@ -32,7 +32,7 @@ namespace MathComparison.src.Presentation.Controllers
         }
 
         [HttpPost("compare")]
-        public IActionResult Compare([FromBody] ComparisionRequest request)
+        public IActionResult Compare([FromBody]ComparisionRequest request)
         {
             try
             {

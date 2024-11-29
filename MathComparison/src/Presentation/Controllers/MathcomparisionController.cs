@@ -9,7 +9,7 @@ namespace MathComparison.src.Presentation.Controllers
 {
     [ApiController]
     [Route("api/math")]
-    public class MathcomparisionController : ControllerBase
+    public class MathcomparisionController
     {
         private readonly IMathExpressionService _service;
 
@@ -24,10 +24,10 @@ namespace MathComparison.src.Presentation.Controllers
             try
             {
                 (string expression1, string expression2) = _service.GenerateExpressions(difficulty);
-                return Ok(new { Expression1 = expression1, Expression2 = expression2 });
+                return new JsonResult (new { Expression1 = expression1, Expression2 = expression2 }) { StatusCode = 200};
             }
             catch (Exception ex) { 
-                return BadRequest(ex.Message);
+                return new JsonResult(ex.Message);
             }
         }
 
@@ -37,11 +37,11 @@ namespace MathComparison.src.Presentation.Controllers
             try
             {
                 var valid = _service.EvaluateComparison(request);
-                return Ok(new { Valid = valid });
+                return new JsonResult(new { Valid = valid });
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);  
+                return new JsonResult(ex.Message) {StatusCode= 400 };  
             }
         }
     }

@@ -1,8 +1,8 @@
 using MathComparison.src.Application.Services;
 using MathComparison.src.Domain.Interfaces;
-using Newtonsoft.Json;
 
 var builder = WebApplication.CreateSlimBuilder(args);
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen( a =>

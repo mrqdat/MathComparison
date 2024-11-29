@@ -14,11 +14,8 @@ builder.Services.AddSwaggerGen( c =>
     });
 });
 
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddControllers().AddJsonOptions( option =>
-{
-    option.JsonSerializerOptions.TypeInfoResolver = new DefaultJsonTypeInfoResolver();
-});
 builder.Services.AddSwaggerGen( a =>
 {
     a.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo

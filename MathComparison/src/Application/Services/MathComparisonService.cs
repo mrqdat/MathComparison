@@ -1,9 +1,6 @@
 ﻿using MathComparison.src.Application.DTOs;
-using MathComparison.src.Domain.Entities;
 using MathComparison.src.Domain.Interfaces;
-using MathComparison.src.Domain.ValueObject;
 using Mathos.Parser;
-using System.Data;
 
 namespace MathComparison.src.Application.Services
 {

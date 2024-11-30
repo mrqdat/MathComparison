@@ -22,10 +22,14 @@ RUN dotnet build "./MathComparison.csproj" -c Release -o /app/build
 
 # Publish stage
 FROM build AS publish
-RUN dotnet publish "./MathComparison.csproj" -c Release -o /app/publish 
+RUN dotnet publish "./MathComparison.csproj" -c Release -o /app/publish /p:UseAppHost=true
 
 # Final stage with runtime (not runtime-deps)
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
+
+# Copy published files from publish stage
 COPY --from=publish /app/publish .
+
+# Set the entry point to the application
 ENTRYPOINT ["dotnet", "MathComparison.dll"]

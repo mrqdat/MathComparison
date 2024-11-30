@@ -8,7 +8,6 @@
     <InvariantGlobalization>true</InvariantGlobalization>
     <PublishAot>true</PublishAot>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <!-- Thay đổi từ Windows sang Linux -->
     <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
     <SuppressTrimAnalysisWarnings>false</SuppressTrimAnalysisWarnings>
     <TrimmerSingleWarn>false</TrimmerSingleWarn>

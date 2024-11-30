@@ -19,14 +19,15 @@ namespace MathComparison.src.Presentation.Controllers
         }
 
         [HttpGet("generate")]
-        public IActionResult Generate([FromQuery] string difficulty )
+        public IActionResult Generate([FromQuery] string difficulty)
         {
             try
             {
                 (string expression1, string expression2) = _service.GenerateExpressions(difficulty);
-                return new JsonResult (new { Expression1 = expression1, Expression2 = expression2 }) { StatusCode = 200};
+                return new JsonResult(new { Expression1 = expression1, Expression2 = expression2 }) { StatusCode = 200 };
             }
-            catch (Exception ex) { 
+            catch (Exception ex)
+            {
                 return new JsonResult(ex.Message);
             }
         }
@@ -41,7 +42,7 @@ namespace MathComparison.src.Presentation.Controllers
             }
             catch (Exception ex)
             {
-                return new JsonResult(ex.Message) {StatusCode= 400 };  
+                return new JsonResult(ex.Message) { StatusCode = 400 };
             }
         }
     }

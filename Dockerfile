@@ -1,37 +1,31 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
+# Base image with ASP.NET runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER app
 WORKDIR /app
 EXPOSE 8080
 
+# Build stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-# Install clang/zlib1g-dev dependencies for publishing to native
+WORKDIR /src
 
-
+# Install platform linker dependencies for Native AOT
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-    clang zlib1g-dev \
+    clang gcc libc6-dev libz-dev libunwind-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-ENV ASPNETCORE_ENVIRONMENT=Production
-ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-
 COPY ["MathComparison/MathComparison.csproj", "MathComparison/"]
 RUN dotnet restore "./MathComparison/MathComparison.csproj"
-
 COPY . .
 WORKDIR "/src/MathComparison"
-RUN dotnet build "./MathComparison.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./MathComparison.csproj" -c Release -o /app/build
 
+# Publish stage
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./MathComparison.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=true
+RUN dotnet publish "./MathComparison.csproj" -c Release -o /app/publish 
 
-FROM mcr.microsoft.com/dotnet/runtime-deps:8.0 AS final
+# Final stage with runtime (not runtime-deps)
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
-EXPOSE 8080
 COPY --from=publish /app/publish .
-ENTRYPOINT ["./MathComparison"]
+ENTRYPOINT ["dotnet", "MathComparison.dll"]

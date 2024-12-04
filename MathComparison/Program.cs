@@ -1,9 +1,16 @@
+using MathComparison.src.Application.DTOs;
 using MathComparison.src.Application.Services;
 using MathComparison.src.Domain.Interfaces;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
-builder.Services.AddControllers();
+ 
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.TypeInfoResolver = JsonContext.Default;
+    });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(a =>
 {

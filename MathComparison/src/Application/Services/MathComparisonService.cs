@@ -8,10 +8,10 @@ namespace MathComparison.src.Application.Services
     {
         private static readonly Random random = new();
 
-        public bool EvaluateComparison(ComparisionRequest request)
+        public async Task<bool> EvaluateComparison(ComparisionRequest request)
         {
-            var value1 = string.IsNullOrEmpty(request.Expression1) == true ? 0 : EvaluateExpression(request.Expression1);
-            var value2 = string.IsNullOrEmpty(request.Expression2) == true ? 0 : EvaluateExpression(request.Expression2);
+            var value1 = string.IsNullOrEmpty(request.Expression1) == true ? 0 : await EvaluateExpression(request.Expression1);
+            var value2 = string.IsNullOrEmpty(request.Expression2) == true ? 0 : await EvaluateExpression(request.Expression2);
 
             return request.Operator switch
             {
@@ -22,48 +22,48 @@ namespace MathComparison.src.Application.Services
             };
         }
 
-        public (string Expression1, string Expression2) GenerateExpressions(string difficulty)
+        public async Task<GenerateExpressionResponse>  GenerateExpressions(string difficulty)
         {
-            return difficulty switch
+            var response = new GenerateExpressionResponse();
+            (response.Expression1, response.Expression2 ) = 
+             difficulty switch
             {
-                "ez" => (GenerateSimpleNumber(), GenerateSimpleNumber()),
-                "normal" => (GenerateSimpleExpression(), GenerateSimpleExpression()),
-                "hard" => (GenerateComplexExpression(), GenerateComplexExpression()),
+                "ez" => (await GenerateSimpleNumber(), await GenerateSimpleNumber()),
+                "normal" => (await GenerateSimpleExpression(), await GenerateSimpleExpression()),
+                "hard" => (await GenerateComplexExpression(), await GenerateComplexExpression()),
                 _ => throw new ArgumentException("invalid difficulty")
-
             };
+            return response;
         }
 
-        public static string GenerateSimpleNumber()
+        public async Task<string> GenerateSimpleNumber()
         {
-            return random.Next(1, 1000).ToString();
+            return await Task.FromResult(random.Next(1,100).ToString());
         }
 
-        public static string GenerateSimpleExpression()
+        public async Task<string> GenerateSimpleExpression()
         {
-            var leftvalue = random.Next(1, 100);
-            var rightvalue = random.Next(1, 100);
+            var leftvalue = await Task.FromResult(random.Next(1, 100));
+            var rightvalue = await Task.FromResult(random.Next(1, 100));
             var opr = new[] { "+", "-", "*", "/" };
 
             var randomOpr = opr[random.Next(opr.Length)];
-
             return $"{leftvalue} {randomOpr} {rightvalue}";
         }
 
-        public static string GenerateComplexExpression()
+        public async Task<string> GenerateComplexExpression()
         {
-            var expression = GenerateSimpleExpression();
-            var additionalexpression = GenerateSimpleExpression();
-
+            var expression = await GenerateSimpleExpression();
+            var additionalexpression = await GenerateSimpleExpression();
             return $"{expression} {new[] { "+", "-" }[random.Next(2)]} ({additionalexpression}) ";
         }
 
-        private static double EvaluateExpression(string expression)
+        private static Task<double> EvaluateExpression(string expression)
         {
             try
             {
-                var data = new MathParser().Parse(expression);
-                return Convert.ToDouble(data);
+                double data = new MathParser().Parse(expression);
+                return Task.FromResult(Convert.ToDouble(data));
             }
             catch
             {

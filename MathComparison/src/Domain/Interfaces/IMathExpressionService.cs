@@ -4,7 +4,7 @@ namespace MathComparison.src.Domain.Interfaces
 {
     public interface IMathExpressionService
     {
-        (string Expression1, string Expression2) GenerateExpressions(string difficulty);
-        bool EvaluateComparison(ComparisionRequest request);
+        Task<GenerateExpressionResponse> GenerateExpressions(string difficulty);
+        Task<bool> EvaluateComparison(ComparisionRequest request);
     }
 }

@@ -7,13 +7,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
     <PublishAot>true</PublishAot>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <!-- Thay đổi từ Windows sang Linux -->
-    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+	  <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+	  <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <SuppressTrimAnalysisWarnings>false</SuppressTrimAnalysisWarnings>
     <TrimmerSingleWarn>false</TrimmerSingleWarn>
     <NoWarn>$(NoWarn);IL2026</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="test\**" />
+    <Content Remove="test\**" />
+    <EmbeddedResource Remove="test\**" />
+    <None Remove="test\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MathosParser" Version="2.0.0" />
@@ -32,10 +38,6 @@
     <Folder Include="src\Infrastructure\Services\" />
     <Folder Include="src\Presentation\Middleware\" />
     <Folder Include="src\Presentation\ViewModels\" />
-    <Folder Include="test\IntergrationTest\Infrastructure\" />
-    <Folder Include="test\IntergrationTest\API\" />
-    <Folder Include="test\UnitTest\Application\" />
-    <Folder Include="test\UnitTest\Domain\" />
   </ItemGroup>
 
 </Project>

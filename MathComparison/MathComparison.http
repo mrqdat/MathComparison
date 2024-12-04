@@ -1,4 +1,4 @@
-﻿@MathComparison_HostAddress = http://localhost:5006
+﻿@MathComparison_HostAddress = http://localhost:23786
 ### dựa trên mức độ khó
  
 GET {{MathComparison_HostAddress}}/api/math/generate?=ez

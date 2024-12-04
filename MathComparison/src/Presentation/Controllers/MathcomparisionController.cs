@@ -1,15 +1,12 @@
 ﻿using MathComparison.src.Application.DTOs;
-using MathComparison.src.Application.Services;
-using MathComparison.src.Domain.Entities;
 using MathComparison.src.Domain.Interfaces;
-using MathComparison.src.Domain.ValueObject;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MathComparison.src.Presentation.Controllers
 {
     [ApiController]
     [Route("api/math")]
-    public class MathcomparisionController
+    public class MathcomparisionController :Controller
     {
         private readonly IMathExpressionService _service;
 
@@ -19,12 +16,12 @@ namespace MathComparison.src.Presentation.Controllers
         }
 
         [HttpGet("generate")]
-        public IActionResult Generate([FromQuery] string difficulty)
+        public async Task<IActionResult> Generate([FromQuery] string difficulty)
         {
             try
             {
-                (string expression1, string expression2) = _service.GenerateExpressions(difficulty);
-                return new JsonResult(new { Expression1 = expression1, Expression2 = expression2 }) { StatusCode = 200 };
+                var data = await _service.GenerateExpressions(difficulty);
+                return Ok(data);
             }
             catch (Exception ex)
             {
@@ -33,12 +30,12 @@ namespace MathComparison.src.Presentation.Controllers
         }
 
         [HttpPost("compare")]
-        public IActionResult Compare([FromBody]ComparisionRequest request)
+        public async Task<IActionResult> Compare([FromBody]ComparisionRequest request)
         {
             try
             {
-                var valid = _service.EvaluateComparison(request);
-                return new JsonResult(new { Valid = valid });
+                var valid = await _service.EvaluateComparison(request);
+                return Ok(new { Valid = valid });
             }
             catch (Exception ex)
             {

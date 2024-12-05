@@ -1,6 +1,9 @@
-﻿namespace MathComparison.src.Application.DTOs
+﻿using System.Text.Json.Serialization;
+
+namespace MathComparison.src.Application.DTOs
 {
-    public class ComparisionRequest
+    [JsonSerializable(typeof(ComparisionRequest))]
+    public class ComparisionRequest  
     {
         public string? Expression1 { get; set; }
         public string? Expression2 { get; set; }

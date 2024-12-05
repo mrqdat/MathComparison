@@ -1,6 +1,7 @@
 ﻿using MathComparison.src.Application.DTOs;
 using MathComparison.src.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace MathComparison.src.Presentation.Controllers
 {
@@ -19,9 +20,9 @@ namespace MathComparison.src.Presentation.Controllers
         public async Task<IActionResult> Generate([FromQuery] string difficulty)
         {
             try
-            {
+            {               
                 var data = await _service.GenerateExpressions(difficulty);
-                return Ok(data);
+                return Ok(data);  
             }
             catch (Exception ex)
             {
@@ -35,7 +36,7 @@ namespace MathComparison.src.Presentation.Controllers
             try
             {
                 var valid = await _service.EvaluateComparison(request);
-                return Ok(valid.IsValid);
+                return Ok(valid);
             }
             catch (Exception ex)
             {

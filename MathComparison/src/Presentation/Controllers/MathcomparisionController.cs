@@ -30,12 +30,12 @@ namespace MathComparison.src.Presentation.Controllers
         }
 
         [HttpPost("compare")]
-        public async Task<IActionResult> Compare([FromBody]ComparisionRequest request)
+        public async Task<IActionResult> Compare(ComparisionRequest request)
         {
             try
             {
                 var valid = await _service.EvaluateComparison(request);
-                return Ok(new { Valid = valid });
+                return Ok(valid.IsValid);
             }
             catch (Exception ex)
             {

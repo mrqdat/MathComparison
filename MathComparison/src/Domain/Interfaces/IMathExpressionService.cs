@@ -5,6 +5,6 @@ namespace MathComparison.src.Domain.Interfaces
     public interface IMathExpressionService
     {
         Task<GenerateExpressionResponse> GenerateExpressions(string difficulty);
-        Task<bool> EvaluateComparison(ComparisionRequest request);
+        Task<Result> EvaluateComparison(ComparisionRequest request);
     }
 }

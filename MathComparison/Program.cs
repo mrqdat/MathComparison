@@ -4,7 +4,7 @@ using MathComparison.src.Domain.Interfaces;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
- 
+
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {

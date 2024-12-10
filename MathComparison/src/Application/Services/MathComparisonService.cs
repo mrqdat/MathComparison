@@ -8,20 +8,22 @@ namespace MathComparison.src.Application.Services
     {
         private static readonly Random random = new();
 
-        public async Task<Result> EvaluateComparison(ComparisionRequest request)
+        public async Task<MathResult> EvaluateComparison(ComparisionRequest request)
         {
             var value1 = string.IsNullOrEmpty(request.Expression1) == true ? 0 : await EvaluateExpression(request.Expression1);
             var value2 = string.IsNullOrEmpty(request.Expression2) == true ? 0 : await EvaluateExpression(request.Expression2);
-            
-            var result = request.Operator switch
+            var res = new MathResult
             {
-                "<" => value1 < value2,
-                ">" => value1 > value2,
-                "=" => Math.Abs(value1 - value2) < 0.00001,
-                _ => throw new ArgumentException("invalid operator")
+                isValid = request.Operator switch
+                {
+                    "<" => value1 < value2,
+                    ">" => value1 > value2,
+                    "=" => Math.Abs(value1 - value2) < 0.00001,
+                    _ => throw new ArgumentException("invalid operator")
+                }
             };
 
-            return new Result { IsValid = result};
+            return res;
         }
 
         public async Task<GenerateExpressionResponse>  GenerateExpressions(string difficulty)

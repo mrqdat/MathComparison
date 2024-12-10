@@ -8,11 +8,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>  
     <PublishAot>true</PublishAot>
-	  <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
-	  <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+	<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <SuppressTrimAnalysisWarnings>false</SuppressTrimAnalysisWarnings>
     <TrimmerSingleWarn>false</TrimmerSingleWarn>
     <NoWarn>$(NoWarn);IL2026</NoWarn>
+    <EnableNativeAot>true</EnableNativeAot>
+  <EnableJsonSourceGeneration>true</EnableJsonSourceGeneration>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+	  <Using Include="System.Text.Json" />
     <PackageReference Include="MathosParser" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

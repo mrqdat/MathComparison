@@ -1,11 +1,9 @@
 ﻿using Newtonsoft.Json.Serialization;
-using System.Text.Json.Serialization;
 
 namespace MathComparison.src.Application.DTOs
 {
-    [JsonSerializable(typeof(Result))]
-    public class Result : SnakeCaseNamingStrategy
+    public class MathResult  
     {
-        public bool IsValid { get; set; }
+        public bool isValid { get; set; }
     }
 }

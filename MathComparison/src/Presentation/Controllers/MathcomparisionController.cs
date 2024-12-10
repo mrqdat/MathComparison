@@ -2,6 +2,7 @@
 using MathComparison.src.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MathComparison.src.Presentation.Controllers
 {
@@ -22,11 +23,11 @@ namespace MathComparison.src.Presentation.Controllers
             try
             {               
                 var data = await _service.GenerateExpressions(difficulty);
-                return Ok(data);  
+                return Ok(data);
             }
             catch (Exception ex)
             {
-                return new JsonResult(ex.Message);
+                return BadRequest(ex.Message);  
             }
         }
 
@@ -40,7 +41,7 @@ namespace MathComparison.src.Presentation.Controllers
             }
             catch (Exception ex)
             {
-                return new JsonResult(ex.Message) { StatusCode = 400 };
+                return BadRequest(ex.Message);
             }
         }
     }
